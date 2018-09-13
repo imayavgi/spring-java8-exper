@@ -7,6 +7,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<rxjava.version>2.0.8</rxjava.version>
 	</properties>
 
 	<parent>
@@ -28,6 +29,16 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex.rxjava2</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>${rxjava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava-math</artifactId>
+			<version>RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
