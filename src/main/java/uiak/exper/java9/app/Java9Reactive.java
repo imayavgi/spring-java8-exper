@@ -44,7 +44,6 @@ public class Java9Reactive {
                 = new TransformProcessor<>(Integer::parseInt);
         EndSubscriber<Integer> subscriber = new EndSubscriber<>();
         List<String> items = List.of("1", "2", "3");
-        List<Integer> expectedResult = List.of(1, 2, 3);
 
 
         // when
@@ -52,6 +51,12 @@ public class Java9Reactive {
         transformProcessor.subscribe(subscriber);
         items.forEach(publisher::submit);
         publisher.close();
+
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
