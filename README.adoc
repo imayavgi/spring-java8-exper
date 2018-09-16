@@ -12,8 +12,8 @@
 - Multi-Core
 - Multi-Node across network
 - Fault Tolerant
-    - with or with out supervision
-    - ignore state and let it crash
+   - with or with out supervision
+   - ignore state and let it crash
 - Location transparency
 - Support for Required throughput
 - Support for Required End user response with out Jitter
