@@ -3,6 +3,7 @@ package uiak.exper.java8.apps.compfutures;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class ConcurrentFetcherApp {
 
@@ -16,8 +17,8 @@ public class ConcurrentFetcherApp {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //return null;
-                    return Thread.currentThread().getName() + " CACHED_CUST_NAME";
+                    return null;
+                    //return Thread.currentThread().getName() + " CACHED_CUST_NAME";
                 }
         );
 
@@ -25,7 +26,7 @@ public class ConcurrentFetcherApp {
                 () -> {
                     try {
                         System.out.println(" Getting customer name from DB ..");
-                        Thread.sleep(2000);
+                        Thread.sleep(3000);
                         System.out.println(" GOT customer name from DB ..");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -38,7 +39,10 @@ public class ConcurrentFetcherApp {
             String custName = (String) CompletableFuture.anyOf(nameFromCacheFetcher, nameFromDBFetcher).get();
             if (custName == null || custName.length() ==0 ) {
                 System.out.println(" Cache is empty .. need to wait for DB ");
-                custName = nameFromDBFetcher.get();
+                custName = nameFromDBFetcher.completeOnTimeout("NO_NAME", 1, TimeUnit.SECONDS).get();
+                nameFromDBFetcher.cancel(true);
+            } else {
+                nameFromDBFetcher.cancel(true);
             }
             System.err.println(custName);
 
