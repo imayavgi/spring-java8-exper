@@ -1,11 +1,17 @@
-REACTIVE
+# REACTIVE APPLICATIONS FEATURES:
+===============================
 
-Features:
-Asynchronous
-Non-Blocking
-Multi-Core
-Multi-Node across network
-Fault Tolerant with or with out supervision
-Support for Required throughput
-Support for Required End user response with out Jitter
-Lowest possible tech footprint
+1. MESSAGE DRIVEN
+2. RESPONSIVE
+3. RESILIENT
+4. ELASTIC
+
+## Implementation techniques.
+-Asynchronous
+-Non-Blocking
+-Multi-Core
+-Multi-Node across network
+-Fault Tolerant with or with out supervision
+-Support for Required throughput
+-Support for Required End user response with out Jitter
+-Lowest possible tech footprint
