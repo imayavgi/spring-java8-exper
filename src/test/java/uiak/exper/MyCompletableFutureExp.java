@@ -2,8 +2,7 @@ package uiak.exper;
 
 import org.junit.Test;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,8 +15,11 @@ public class MyCompletableFutureExp {
         System.err.println(s);
     }
 
-    //@Test
+    @Test
     public void supplyAsyncTest() throws ExecutionException, InterruptedException {
+        ExecutorService executorService =
+                new ThreadPoolExecutor(10, 10, 0L, TimeUnit.MILLISECONDS,
+                        new LinkedBlockingQueue<Runnable>());
         CompletableFuture<String> cfs2 = CompletableFuture.supplyAsync(() -> {
             try {
                 System.err.println("-----------> "+ System.currentTimeMillis() + " SUPPLY SYNC JOB");
@@ -26,7 +28,8 @@ public class MyCompletableFutureExp {
                 e.printStackTrace();
             }
             return Thread.currentThread().getName() + " SUPPLY SYNC\n";
-        });
+        }, executorService);
+        executorService.shutdown();
         System.err.println(cfs2.get( ));
     }
 
